@@ -1,8 +1,10 @@
 package jp.ac.doshisha.mikilab.walllightforb;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
 
     String url = "http://192.168.1.38/api/p1SV3amWQL4aQF9tPJdJ4vOBqSwzK3iFH1gwENrI/groups/2/action";
+    String url_light = "http://192.168.1.38/api/p1SV3amWQL4aQF9tPJdJ4vOBqSwzK3iFH1gwENrI/lights/";
     String json;
     private String res = "";
 
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         final SeekBar seekBar = (SeekBar)findViewById(R.id.seekBar);
         Button coolButton = (Button)findViewById(R.id.button_cool);
@@ -46,17 +51,22 @@ public class MainActivity extends AppCompatActivity {
                     public void onStopTrackingTouch(SeekBar seekBar) {
                         // ツマミを離したときに呼ばれる
                         if(mode == 0){
-                            json = "{\"on\":true,\"hue\":24000,\"bri\":"+bri+",\"sat\":254}";
+                            json = "{\"on\":true,\"hue\":42000,\"bri\":"+bri+",\"sat\":254}";
                             postTest(0);
                         }else if(mode == 1){
-                            json =  "{\"on\":true,\"hue\":60000,\"bri\":"+bri+",\"sat\":254}";
+                            json =  "{\"on\":true,\"hue\":7000,\"bri\":"+bri+",\"sat\":180}";
                             postTest(0);
                         }else if(mode == 2){
-                            json = "{\"on\":true,\"hue\":46014,\"bri\":"+bri+",\"sat\":254}";
+                            json = "{\"on\":true,\"bri\":"+bri+",\"ct\":222}";
                             postTest(0);
                         }else if(mode == 3){
-                            json = "{\"on\":true,\"hue\":0,\"bri\":"+bri+",\"sat\":254}";
-                            postTest(1);
+                            for(int i = 1; i < 9; i++) {
+                                if(i % 4 == 0) json = "{\"on\":true,\"hue\":0,\"bri\":" + bri + ",\"sat\":254}";
+                                else if(i % 4 == 1) json = "{\"on\":true,\"hue\":60000,\"bri\":" + bri + ",\"sat\":254}";
+                                else if(i % 4 == 2) json = "{\"on\":true,\"hue\":24000,\"bri\":" + bri + ",\"sat\":254}";
+                                else json = "{\"on\":true,\"hue\":50000,\"bri\":" + bri + ",\"sat\":254}";
+                                postTest(i+15);
+                            }
                         }
                     }
                 }
@@ -65,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         coolButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                json = "{\"on\":true,\"hue\":24000,\"bri\":"+bri+",\"sat\":254}";
+                json = "{\"on\":true,\"hue\":42000,\"bri\":"+bri+",\"sat\":254}";
                 mode = 0;
                 postTest(0);
             }
@@ -73,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         warmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                json =  "{\"on\":true,\"hue\":60000,\"bri\":"+bri+",\"sat\":254}";
+                json =  "{\"on\":true,\"hue\":7000,\"bri\":"+bri+",\"sat\":180}";
                 mode = 1;
                 postTest(0);
             }
@@ -81,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         nomalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                json = "{\"on\":true,\"hue\":46014,\"bri\":"+bri+",\"sat\":254}";
+                json = "{\"on\":true,\"bri\":"+bri+",\"ct\":222}";
                 mode = 2;
                 postTest(0);
             }
@@ -89,9 +99,14 @@ public class MainActivity extends AppCompatActivity {
         partyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                json = "{\"on\":true,\"hue\":0,\"bri\":"+bri+",\"sat\":254}";
+                for(int i = 1; i < 9; i++) {
+                    if(i % 4 == 0) json = "{\"on\":true,\"hue\":0,\"bri\":" + bri + ",\"sat\":254}";
+                    else if(i % 4 == 1) json = "{\"on\":true,\"hue\":60000,\"bri\":" + bri + ",\"sat\":254}";
+                    else if(i % 4 == 2) json = "{\"on\":true,\"hue\":24000,\"bri\":" + bri + ",\"sat\":254}";
+                    else json = "{\"on\":true,\"hue\":50000,\"bri\":" + bri + ",\"sat\":254}";
+                    postTest(i+15);
+                }
                 mode = 3;
-                postTest(1);
             }
         });
     }
@@ -102,14 +117,14 @@ public class MainActivity extends AppCompatActivity {
         RequestBody body = RequestBody.create(JSON, json);
         Request request;
 
-        if(num == 1) {
+        if(num == 0) {
             request = new Request.Builder()
                     .url(url)
                     .put(body)
                     .build();
         }else{
             request = new Request.Builder()
-                    .url(url)
+                    .url(url_light+num+"/state")
                     .put(body)
                     .build();
         }
@@ -140,4 +155,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }

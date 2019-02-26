@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/activity_main"
+        tools:context=".MainActivity">
+
+    <SeekBar
+            android:layout_width="0dp"
+            android:layout_height="119dp"
+            android:id="@+id/seekBar" android:layout_marginTop="32dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/button_warm" android:progress="254" android:max="254"
+            app:layout_constraintStart_toEndOf="@+id/textView" android:thumb="@drawable/circle"
+            android:progressDrawable="@drawable/brightness"/>
+    <Button
+            android:layout_width="200dp"
+            android:layout_height="180dp"
+            android:id="@+id/button_cool" android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/button_normal" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_warm"
+            android:layout_marginEnd="100dp" android:textSize="36sp" android:layout_marginStart="150dp"
+            android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/seekBar"
+            android:background="@drawable/sun"/>
+    <Button
+            android:layout_width="200dp"
+            android:layout_height="180dp"
+            android:id="@+id/button_warm" android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/button_party"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_cool" android:layout_marginStart="100dp"
+            android:textSize="36sp" android:layout_marginEnd="150dp" android:background="@drawable/winter"/>
+    <Button
+            android:layout_width="200dp"
+            android:layout_height="180dp"
+            android:id="@+id/button_normal" android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="@+id/button_cool"
+            app:layout_constraintEnd_toEndOf="@+id/button_cool"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/button_cool"
+            android:textSize="36sp" android:background="@drawable/nomal"/>
+    <Button
+            android:layout_width="200dp"
+            android:layout_height="180dp"
+            android:id="@+id/button_party" android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="@+id/button_warm"
+            app:layout_constraintStart_toStartOf="@+id/button_warm"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/button_warm"
+            android:textSize="36sp" android:background="@drawable/party"/>
+    <TextView
+            android:text="Brightness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView" android:textSize="36sp"
+            android:textColor="#A80A7B" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="50dp" app:layout_constraintTop_toTopOf="@+id/seekBar"
+            android:layout_marginTop="8dp" app:layout_constraintBottom_toBottomOf="@+id/seekBar"
+            android:layout_marginBottom="8dp" app:layout_constraintEnd_toStartOf="@+id/seekBar"
+            android:layout_marginEnd="8dp"/>
+</android.support.constraint.ConstraintLayout>
