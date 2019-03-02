@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">Wall Light for B</string>
+    <string name="app_label">壁面照明</string>
     <string name="title_activity_main"></string>
 </resources>
