@@ -61,12 +61,15 @@ public class MainActivity extends AppCompatActivity {
                             json = "{\"on\":true,\"bri\":"+bri+",\"ct\":222}";
                             postTest(0);
                         }else if(mode == 3){
-                            for(int i = 1; i < 9; i++) {
-                                if(i % 4 == 0) json = "{\"on\":true,\"hue\":0,\"bri\":" + bri + ",\"sat\":254}";
-                                else if(i % 4 == 1) json = "{\"on\":true,\"hue\":60000,\"bri\":" + bri + ",\"sat\":254}";
-                                else if(i % 4 == 2) json = "{\"on\":true,\"hue\":24000,\"bri\":" + bri + ",\"sat\":254}";
-                                else json = "{\"on\":true,\"hue\":50000,\"bri\":" + bri + ",\"sat\":254}";
-                                postTest(i+15);
+                            for(int i = 16; i < 25; i++) {
+                                if(i == 16) json = "{\"on\":true,\"hue\":35000,\"bri\":" + bri + ",\"sat\":100}";
+                                else if(i == 24) json = "{\"on\":true,\"hue\":60000,\"bri\":" + bri + ",\"sat\":254}";
+                                else if(i  == 20) json = "{\"on\":true,\"hue\":42000,\"bri\":" + bri + ",\"sat\":254}";
+                                else if(i  == 22) json = "{\"on\":true,\"hue\":24000,\"bri\":" + bri + ",\"sat\":254}";
+                                else if(i  == 21) json = "{\"on\":true,\"hue\":0,\"bri\":" + bri + ",\"sat\":254}";
+                                else if(i  == 23) json = "{\"on\":true,\"hue\":10000,\"bri\":" + bri + ",\"sat\":150}";
+                                else if(i  == 19) json = "{\"on\":true,\"hue\":48000,\"bri\":" + bri + ",\"sat\":254}";
+                                postTest(i);
                             }
                         }
                     }
@@ -100,12 +103,15 @@ public class MainActivity extends AppCompatActivity {
         partyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(int i = 1; i < 9; i++) {
-                    if(i % 4 == 0) json = "{\"on\":true,\"hue\":0,\"bri\":" + bri + ",\"sat\":254}";
-                    else if(i % 4 == 1) json = "{\"on\":true,\"hue\":60000,\"bri\":" + bri + ",\"sat\":254}";
-                    else if(i % 4 == 2) json = "{\"on\":true,\"hue\":24000,\"bri\":" + bri + ",\"sat\":254}";
-                    else json = "{\"on\":true,\"hue\":50000,\"bri\":" + bri + ",\"sat\":254}";
-                    postTest(i+15);
+                for(int i = 16; i < 25; i++) {
+                    if(i == 16) json = "{\"on\":true,\"hue\":35000,\"bri\":" + bri + ",\"sat\":100}";
+                    else if(i == 24) json = "{\"on\":true,\"hue\":60000,\"bri\":" + bri + ",\"sat\":254}";
+                    else if(i  == 20) json = "{\"on\":true,\"hue\":42000,\"bri\":" + bri + ",\"sat\":254}";
+                    else if(i  == 22) json = "{\"on\":true,\"hue\":24000,\"bri\":" + bri + ",\"sat\":254}";
+                    else if(i  == 21) json = "{\"on\":true,\"hue\":0,\"bri\":" + bri + ",\"sat\":254}";
+                    else if(i  == 23) json = "{\"on\":true,\"hue\":10000,\"bri\":" + bri + ",\"sat\":150}";
+                    else if(i  == 19) json = "{\"on\":true,\"hue\":48000,\"bri\":" + bri + ",\"sat\":254}";
+                    postTest(i);
                 }
                 mode = 3;
             }
